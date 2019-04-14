@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="{{ url_for('static', filename = 'calculate.js') }}"></script>
+    <title>Root Calculator</title>
+</head>
+<body>
+    <form name="numericMethods" action="{{ url_for('main') }}" method="post">
+        <label>Función</label>
+        <br> <br>
+        <input type="text" name="function">
+        <br> <br>
+        <label>Puntos</label>
+        <br> <br>
+        <input type="text" name="punto_1">
+        <input type="text" name="punto_2">
+        <br> <br>
+        <select name="method" onchange="OnSelectionChange(this)">
+            <option value="" selected="selected" hidden="hidden">Elige una opción</option>
+            <option value="1">Bisección</option>
+            <option value="2">Falsa Posición</option>
+            <option value="3">Falsa Posición Modificada</option>
+            <option value="4">Newton-Raphson</option>
+            <option value="5">Secante</option>
+        </select>
+        <br> <br>
+        <input type="submit" value="Calcular Raíz">
+    </form>
+</body>
+</html>
