@@ -14,3 +14,18 @@ function OnSelectionChange(select) {
         document.numericMethods.action = "/calculate/root/sec";
     }
 }
+
+
+
+function graficar() {
+    var str_expr = document.getElementById("function_a").value;
+    if (str_expr.length > 0){
+        var quickplot = new QuickPlot(document.getElementById("canvas"));
+        quickplot.setFunction(function (x) { return Math.pow(x, 2) });
+        quickplot.setGraphDomain(-10, 10);
+        quickplot.setGraphRange(-5, 5);
+        quickplot.drawGraph();
+    } else {
+        alert("No se puede graficar por que la función esta vacia!")
+    }
+}

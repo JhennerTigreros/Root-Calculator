@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="{{ url_for('static', filename = 'calculate.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/expr-eval/1.2.2/bundle.js"></script>
     <title>Root Calculator</title>
 </head>
 <body>
     <form name="numericMethods" action="{{ url_for('main') }}" method="post">
         <label>Función</label>
         <br> <br>
-        <input type="text" name="function">
+        <input type="text" name="function" id="function_a"> <input type="button" onclick="graficar()" value="Graficar"/>
         <br> <br>
         <label>Puntos</label>
         <br> <br>
@@ -29,5 +30,8 @@
         <br> <br>
         <input type="submit" value="Calcular Raíz">
     </form>
+
+    <canvas id="canvas" width=800px height=800px class="canvas">ERROR LOADING CANVAS</canvas>
+    <script type="text/javascript" src="{{ url_for('static', filename = 'quickplot.js') }}"></script>
 </body>
 </html>

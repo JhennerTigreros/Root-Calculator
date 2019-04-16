@@ -32,7 +32,7 @@ def sec(function, puntos):
         if not ((errorActual > errorEsperado) and (iteraciones < limite)):
             break
 
-    return [x, errorActual, expr.evaluate({'x': x})]
+    return [str(x), str(errorActual), str(expr.evaluate({'x': x}))]
 
 def fake(function, puntos):
     global parser
@@ -78,7 +78,7 @@ def fake(function, puntos):
         if not(errorActual > errorEsperado):
             break
 
-    return [x_r_anterior, errorActual, expr.evaluate({'x': x_r_anterior}), iteraciones]
+    return [str(x_r_anterior), str(errorActual), str(expr.evaluate({'x': x_r_anterior})), str(iteraciones)]
 
 def fake_mod(function, puntos):
     global parser
@@ -140,7 +140,7 @@ def fake_mod(function, puntos):
         if not(errorActual > errorEsperado):
             break
 
-    return [x_r_anterior, errorActual, expr.evaluate({'x': x_r_anterior}), iteraciones]
+    return [str(x_r_anterior), str(errorActual), str(expr.evaluate({'x': x_r_anterior})), str(iteraciones)]
     
 
 
@@ -172,7 +172,7 @@ def newton(function, puntos):
             return ["Se excedio de la cantidad de iteraciones.", x, errorActual, expr.evaluate({'x': x_ant}), iteraciones]
     except ZeroDivisionError:
         print("División por cero.")
-        return ["División por cero.", x, errorActual, expr.evaluate({'x': x_ant}), iteraciones]
+        return ["División por cero.", str(x), str(errorActual), str(expr.evaluate({'x': x_ant})), str(iteraciones)]
 
 
 def bisection(function, puntos):
@@ -216,5 +216,5 @@ def bisection(function, puntos):
         if not(errorActual > errorEsperado):
             break
 
-    return [x_r_anterior, errorActual, expr.evaluate({'x': x_r_anterior}), iteraciones]
+    return [str(x_r_anterior), str(errorActual), str(expr.evaluate({'x': x_r_anterior})), str(iteraciones)]
 
