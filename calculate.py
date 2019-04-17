@@ -5,6 +5,7 @@ from utils import *
 app = Flask(__name__)
 app.secret_key = "jhenner123"
 
+@app.route("/", methods=["POST", "GET"])
 @app.route("/main", methods=["POST", "GET"])
 def main():
     return render_template("calculate.html")

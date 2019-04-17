@@ -1,4 +1,6 @@
 from py_expression_eval import Parser
+from sympy import *
+from sympy.parsing.sympy_parser import parse_expr
 
 parser = Parser()
 
@@ -146,30 +148,37 @@ def fake_mod(function, puntos):
 
 def newton(function, puntos):
     global parser
+    function = function.replace("^", "**")
+    expr_s = parse_expr(function)
+    xx = symbols("x")
+    expr_s_d = diff(expr_s, xx)
+    function = function.replace("**", "^")
     expr = parser.parse(function).simplify({})
-
     x = puntos[0]
     x_ant = puntos[1]
 
-    errrorEsperado = (0.5 * pow(10, -8) * 100)
+    errorEsperado = (0.5 * pow(10, -8) * 100)
     errorActual = 1
     limite_iteraciones = 1000
 
     iteraciones = 0
 
+    print(expr_s_d)
+    print(expr)
     try:
         while True:
             y = expr.evaluate({'x': x})
-            #Falata derivada
-            x = x - (y / 1)
+            x = x - (y / expr_s_d.evalf(subs={xx:x}))
             errorActual = abs((x - x_ant) / x) * 100
             x_ant = x
             iteraciones = iteraciones + 1
-            if not(errorActual>errrorEsperado and iteraciones < limite_iteraciones):
+            if not(errorActual>errorEsperado and iteraciones < limite_iteraciones):
                 break
 
         if iteraciones >= limite_iteraciones:
             return ["Se excedio de la cantidad de iteraciones.", x, errorActual, expr.evaluate({'x': x_ant}), iteraciones]
+        else:
+            return [str(x), str(expr.evaluate({'x': x})), str(errorActual), str(iteraciones)]
     except ZeroDivisionError:
         print("División por cero.")
         return ["División por cero.", str(x), str(errorActual), str(expr.evaluate({'x': x_ant})), str(iteraciones)]
@@ -217,4 +226,3 @@ def bisection(function, puntos):
             break
 
     return [str(x_r_anterior), str(errorActual), str(expr.evaluate({'x': x_r_anterior})), str(iteraciones)]
-
